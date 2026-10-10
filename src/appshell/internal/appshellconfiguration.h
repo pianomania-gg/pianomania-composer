@@ -56,8 +56,6 @@ public:
 
     void init();
 
-    bool hasCompletedFirstLaunchSetup() const override;
-    void setHasCompletedFirstLaunchSetup(bool has) override;
 
     bool welcomeDialogShowOnStartup() const override;
     void setWelcomeDialogShowOnStartup(bool show) override;

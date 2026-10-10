@@ -31,7 +31,7 @@ import MuseScore.AppShell
 StyledDialogView {
     id: root
 
-    title: qsTrc("appshell/about", "About Pianomania MuseScore")
+    title: qsTrc("appshell/about", "About Pianomania Composer")
 
     contentHeight: 448
     contentWidth: 480
@@ -83,7 +83,7 @@ StyledDialogView {
 
                 StyledTextLabel {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: qsTrc("appshell/about", "Pianomania MuseScore version:") + " "
+                    text: qsTrc("appshell/about", "Pianomania Composer version:") + " "
                           + aboutModel.pianomaniaMuseScoreVersion()
                     font: ui.theme.bodyBoldFont
                 }

@@ -76,27 +76,6 @@ const UiActionList ProjectUiActions::m_actions = {
              TranslatableString("action", "Save &selection…"),
              TranslatableString("action", "Save selection")
              ),
-    UiAction("file-save-to-cloud",
-             mu::context::UiCtxAny,
-             mu::context::CTX_ANY,
-             TranslatableString("action", "Save to clo&ud…"),
-             TranslatableString("action", "Save to cloud"),
-             IconCode::Code::CLOUD_FILE
-             ),
-    UiAction("file-publish",
-             mu::context::UiCtxAny,
-             mu::context::CTX_ANY,
-             TranslatableString("action", "Publish to &MuseScore.com…"),
-             TranslatableString("action", "Publish to MuseScore.com"),
-             IconCode::Code::CLOUD_FILE
-             ),
-    UiAction("file-share-audio",
-             mu::context::UiCtxAny,
-             mu::context::CTX_ANY,
-             TranslatableString("action", "Share on &Audio.com…"),
-             TranslatableString("action", "Share on Audio.com"),
-             IconCode::Code::SHARE_AUDIO
-             ),
     UiAction("file-export",
              mu::context::UiCtxAny,
              mu::context::CTX_ANY,

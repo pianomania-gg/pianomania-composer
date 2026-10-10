@@ -120,7 +120,6 @@ void CommandLineParser::init()
     m_parser.addOption(QCommandLineOption("score-elements",
                                           "Scan the given score and export elements to a single JSON file, print it to stdout"));
     m_parser.addOption(QCommandLineOption("source-update", "Update the source in the given score"));
-#ifndef PIANOMANIA_COMPOSER_PRODUCTION
     m_parser.addOption(QCommandLineOption(pianomaniaOptionName(compatibility::EXPORT_MIDI_COMMAND_OPTION),
                                           "Export Pianomania MIDI files using this output base path", "basePath"));
     m_parser.addOption(QCommandLineOption(pianomaniaOptionName(compatibility::EXPORT_MEI_COMMAND_OPTION),
@@ -135,7 +134,6 @@ void CommandLineParser::init()
                                           "Apply Pianomania score style and automatic page/system layout before saving or exporting"));
     m_parser.addOption(QCommandLineOption(pianomaniaOptionName(compatibility::PRETTIFY_COMMAND_OPTION),
                                           "Apply Pianomania slur/fingering prettify, replacing manual placements before saving or exporting"));
-#endif
 
     m_parser.addOption(QCommandLineOption({ "S", "style" }, "Load style file", "style"));
 
@@ -431,7 +429,6 @@ void CommandLineParser::parse(int argc, char** argv)
         }
     }
 
-#ifndef PIANOMANIA_COMPOSER_PRODUCTION
     if (m_parser.isSet(pianomaniaOptionName(compatibility::EXPORT_MIDI_COMMAND_OPTION))
         || m_parser.isSet(pianomaniaOptionName(compatibility::EXPORT_MEI_COMMAND_OPTION))
         || m_parser.isSet(pianomaniaOptionName(compatibility::EXPORTER_MANIFEST_V3_COMMAND_OPTION))
@@ -490,7 +487,6 @@ void CommandLineParser::parse(int argc, char** argv)
     if (m_parser.isSet(pianomaniaOptionName(compatibility::PRETTIFY_COMMAND_OPTION))) {
         m_options.converterTask.params[CmdOptions::ParamKey::PianomaniaPrettify] = true;
     }
-#endif
 
     // MusicXML
     if (m_parser.isSet("musicxml-use-default-font")) {

@@ -37,8 +37,6 @@ class IAppShellConfiguration : MODULE_GLOBAL_INTERFACE
 public:
     virtual ~IAppShellConfiguration() = default;
 
-    virtual bool hasCompletedFirstLaunchSetup() const = 0;
-    virtual void setHasCompletedFirstLaunchSetup(bool has) = 0;
 
     virtual bool welcomeDialogShowOnStartup() const = 0;
     virtual void setWelcomeDialogShowOnStartup(bool show) = 0;

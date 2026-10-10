@@ -55,7 +55,8 @@ FocusScope {
     }
 
     Component.onCompleted: {
-        tabBar.currentIndex = scoresPageModel.tabIndex
+        scoresPageModel.tabIndex = 0
+        tabBar.currentIndex = 0
         tabBar.completed = true
     }
 
@@ -158,13 +159,7 @@ FocusScope {
                 navigation.column: 1
             }
 
-            StyledTabButton {
-                text: qsTrc("project", "My online scores")
 
-                navigation.name: "MyOnlineScores"
-                navigation.panel: navTabPanel
-                navigation.column: 2
-            }
         }
 
         NavigationPanel {
@@ -320,23 +315,6 @@ FocusScope {
 
             //: accessibility name for the panel at the bottom of the "Scores" page
             accessible.name: qsTrc("project", "Scores actions")
-        }
-
-        FlatButton {
-            anchors.left: parent.left
-            anchors.leftMargin: prv.sideMargin
-            anchors.verticalCenter: parent.verticalCenter
-
-            navigation.name: "ScoreManager"
-            navigation.panel: navBottomPanel
-            navigation.column: 1
-
-            minWidth: 216
-            text: qsTrc("project", "Score manager (online)")
-
-            onClicked: {
-                scoresPageModel.openScoreManager()
-            }
         }
 
         Row {

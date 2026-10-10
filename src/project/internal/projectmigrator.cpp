@@ -44,23 +44,8 @@ using namespace mu::engraving;
 using namespace mu::engraving::compat;
 using namespace muse;
 
-static const Uri MIGRATION_DIALOG_URI("musescore://project/migration");
 static const io::path_t LELAND_STYLE_PATH(":/engraving/styles/migration-306-style-Leland.mss");
 static const io::path_t EDWIN_STYLE_PATH(":/engraving/styles/migration-306-style-Edwin.mss");
-
-static MigrationType migrationTypeFromMscVersion(int mscVersion)
-{
-    if (mscVersion < 302) {
-        return MigrationType::Pre_3_6;
-    }
-
-    if (mscVersion < 400) {
-        return MigrationType::Ver_3_6;
-    }
-
-    UNREACHABLE;
-    return MigrationType::Unknown;
-}
 
 Ret ProjectMigrator::migrateEngravingProjectIfNeed(engraving::EngravingProjectPtr project)
 {
@@ -70,23 +55,14 @@ Ret ProjectMigrator::migrateEngravingProjectIfNeed(engraving::EngravingProjectPt
     //! NOTE If the migration is not done, then the default style for the score is determined by the version.
     //! When migrating, the version becomes the current one, so remember the version of the default style before migrating
     project->masterScore()->style().setDefaultStyleVersion(ReadStyleHook::styleDefaultByMscVersion(project->mscVersion()));
-    MigrationType migrationType = migrationTypeFromMscVersion(project->mscVersion());
     m_resetStyleSettings = true;
-
-    MigrationOptions migrationOptions = configuration()->migrationOptions(migrationType);
-    if (migrationOptions.isAskAgain) {
-        Ret ret = askAboutMigration(migrationOptions, project->appVersion(), migrationType);
-
-        if (!ret) {
-            return ret;
-        }
-
-        configuration()->setMigrationOptions(migrationType, migrationOptions);
-    }
-
-    if (!migrationOptions.isApplyMigration) {
-        return true;
-    }
+    MigrationOptions migrationOptions;
+    migrationOptions.appVersion = mu::engraving::Constants::MSC_VERSION;
+    migrationOptions.isApplyMigration = true;
+    migrationOptions.isAskAgain = false;
+    migrationOptions.isApplyLeland = false;
+    migrationOptions.isApplyEdwin = false;
+    migrationOptions.isRemapPercussion = true;
 
     Ret ret = migrateProject(project, migrationOptions);
     if (!ret) {
@@ -96,43 +72,6 @@ Ret ProjectMigrator::migrateEngravingProjectIfNeed(engraving::EngravingProjectPt
     }
 
     return ret;
-}
-
-Ret ProjectMigrator::askAboutMigration(MigrationOptions& out, const QString& appVersion, MigrationType migrationType)
-{
-    UriQuery query(MIGRATION_DIALOG_URI);
-    query.addParam("appVersion", Val(appVersion));
-    query.addParam("migrationType", Val(migrationType));
-    query.addParam("isApplyLeland", Val(out.isApplyLeland));
-    query.addParam("isApplyEdwin", Val(out.isApplyEdwin));
-    query.addParam("isRemapPercussion", Val(out.isRemapPercussion));
-
-#ifndef MUSE_MODULE_UI_SYNCINTERACTIVE_SUPPORTED
-    //! NOTE If there is no support for synchronous interactivity (web)
-    //! Then we will migrate without questions
-
-    out.appVersion = mu::engraving::Constants::MSC_VERSION;
-    out.isApplyMigration = true;
-    out.isAskAgain = false;
-    out.isApplyLeland = true;
-    out.isApplyEdwin = true;
-    out.isRemapPercussion = true;
-#else
-    RetVal<Val> rv = interactive()->openSync(query);
-    if (!rv.ret) {
-        return rv.ret;
-    }
-
-    QVariantMap vals = rv.val.toQVariant().toMap();
-    out.appVersion = mu::engraving::Constants::MSC_VERSION;
-    out.isApplyMigration = vals.value("isApplyMigration").toBool();
-    out.isAskAgain = vals.value("isAskAgain").toBool();
-    out.isApplyLeland = vals.value("isApplyLeland").toBool();
-    out.isApplyEdwin = vals.value("isApplyEdwin").toBool();
-    out.isRemapPercussion = vals.value("isRemapPercussion").toBool();
-#endif
-
-    return true;
 }
 
 void ProjectMigrator::resetStyleSettings(mu::engraving::MasterScore* score)

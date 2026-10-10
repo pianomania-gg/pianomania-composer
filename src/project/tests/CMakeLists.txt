@@ -26,6 +26,7 @@ set(MODULE_TEST_SRC
     ${CMAKE_CURRENT_LIST_DIR}/environment.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mocks/projectconfigurationmock.h
     ${CMAKE_CURRENT_LIST_DIR}/mscmetareadertests.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/composerlocalsavetest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/pianomaniaexporttest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/templatesrepositorytest.cpp
 )
@@ -42,6 +43,7 @@ set(MODULE_TEST_LINK
 )
 
 include(SetupGTest)
+target_include_directories(project_test PRIVATE ${PROJECT_SOURCE_DIR}/src/project)
 
 
 # GTest exits 0 when a filter or build change silently removes tests. Require the
@@ -50,5 +52,5 @@ include(SetupGTest)
 # runutests.sh sets GTEST_COLOR=1, so a colour escape sits between the tag and the
 # count. Skip whatever separates them instead of assuming a single space.
 set_tests_properties(project_test PROPERTIES
-    PASS_REGULAR_EXPRESSION "\\[  PASSED  \\][^0-9]*37 tests"
+    PASS_REGULAR_EXPRESSION "\\[  PASSED  \\][^0-9]*40 tests"
 )

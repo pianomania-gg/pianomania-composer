@@ -55,8 +55,6 @@ qt_add_qml_module(project_qml
         internal/ScoresPage/scorethumbnailloader.cpp
         internal/ScoresPage/scorethumbnailloader.h
     QML_FILES
-        AlsoShareAudioComDialog.qml
-        AskSaveLocationTypeDialog.qml
         AudioGenerationSettings.qml
         AudioGenerationSettingsDialog.qml
         ExportDialog.qml
@@ -79,8 +77,6 @@ qt_add_qml_module(project_qml
         internal/Export/PdfSettingsPage.qml
         internal/Export/PngSettingsPage.qml
         internal/Export/SvgSettingsPage.qml
-        internal/Migration/MigrationContentFor362.qml
-        internal/Migration/MigrationContentForPre362.qml
         internal/NewScore/AdditionalInfoView.qml
         internal/NewScore/ChooseInstrumentsAndTemplatesPage.qml
         internal/NewScore/CreateFromTemplatePage.qml
@@ -100,27 +96,19 @@ qt_add_qml_module(project_qml
         internal/Properties/ProjectPropertiesFileInfoPanel.qml
         internal/Properties/ProjectPropertiesView.qml
         internal/Properties/PropertyItem.qml
-        internal/SaveToCloud/SaveLocationOption.qml
         internal/ScoresPage/CloudScoreIndicatorButton.qml
         internal/ScoresPage/RecentScoresView.qml
         internal/ScoresPage/ScoreGridItem.qml
         internal/ScoresPage/ScoreListItem.qml
         internal/ScoresPage/ScoreThumbnail.qml
         Message.qml
-        MigrationDialog.qml
         NewScoreDialog.qml
         ProjectPropertiesDialog.qml
-        ProjectUploadedDialog.qml
-        SaveToCloudDialog.qml
         ScoresGridView.qml
         ScoresListView.qml
         ScoresPage.qml
         ScoresView.qml
-        UploadProgressDialog.qml
     RESOURCES
-        internal/Migration/migration.png
-        internal/SaveToCloud/images/Cloud.png
-        internal/SaveToCloud/images/Laptop.png
         internal/ScoresPage/images/Placeholder_GP.png
         internal/ScoresPage/images/Placeholder_MEI.png
         internal/ScoresPage/images/Placeholder_MIDI.png

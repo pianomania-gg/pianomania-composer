@@ -29,8 +29,6 @@
 #include "iprojectfilescontroller.h"
 #include "global/iinteractive.h"
 
-#include "cloud/musescorecom/imusescorecomservice.h"
-#include "cloud/audiocom/iaudiocomservice.h"
 
 namespace mu::project {
 class OpenSaveProjectScenario : public IOpenSaveProjectScenario, public muse::Contextable
@@ -38,8 +36,6 @@ class OpenSaveProjectScenario : public IOpenSaveProjectScenario, public muse::Co
     muse::GlobalInject<IProjectConfiguration> configuration;
     muse::ContextInject<IProjectFilesController> projectFilesController = { this };
     muse::ContextInject<muse::IInteractive> interactive = { this };
-    muse::ContextInject<muse::cloud::IMuseScoreComService> museScoreComService = { this };
-    muse::ContextInject<muse::cloud::IAudioComService> audioComService = { this };
 
 public:
     OpenSaveProjectScenario(const muse::modularity::ContextPtr& iocCtx)
@@ -51,29 +47,5 @@ public:
                                                SaveLocationType preselectedType = SaveLocationType::Undefined) const override;
 
     muse::RetVal<muse::io::path_t> askLocalPath(INotationProjectPtr project, SaveMode mode) const override;
-    muse::RetVal<CloudProjectInfo> askCloudLocation(INotationProjectPtr project, SaveMode mode) const override;
-    muse::RetVal<CloudProjectInfo> askPublishLocation(INotationProjectPtr project) const override;
-    muse::RetVal<CloudAudioInfo> askShareAudioLocation(INotationProjectPtr project) const override;
-
-    bool warnBeforeSavingToExistingPubliclyVisibleCloudProject() const override;
-
-    void showCloudOpenError(const muse::Ret& ret) const override;
-    muse::Ret showCloudSaveError(const muse::Ret& ret, const CloudProjectInfo& info, bool isPublishShare,
-                                 bool alreadyAttempted) const override;
-    muse::Ret showAudioCloudShareError(const muse::Ret& ret) const override;
-
-private:
-    muse::RetVal<SaveLocationType> saveLocationType() const;
-    muse::RetVal<SaveLocationType> askSaveLocationType() const;
-
-    /// \param isPublishShare:
-    ///     false -> this is part of a "Save to cloud" action
-    ///     true -> this is part of a "Publish" action
-    muse::RetVal<CloudProjectInfo> doAskCloudLocation(INotationProjectPtr project, SaveMode mode, bool isPublishShare) const;
-
-    bool warnBeforePublishing(bool isPublishShare, muse::cloud::Visibility visibility) const;
-
-    muse::Ret warnCloudNotAvailableForUploading(bool isPublishShare) const;
-    muse::Ret warnCloudNotAvailableForSharingAudio() const;
 };
 }
