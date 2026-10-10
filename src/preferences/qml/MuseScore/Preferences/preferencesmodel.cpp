@@ -238,7 +238,6 @@ void PreferencesModel::resetFactorySettings()
     configuration()->revertToFactorySettings(KEEP_DEFAULT_SETTINGS);
 
     // Unreset the "First Launch Completed" setting so the first-time launch wizard does not appear.
-    configuration()->setHasCompletedFirstLaunchSetup(true);
 
     configuration()->startEditSettings();
     QApplication::restoreOverrideCursor();

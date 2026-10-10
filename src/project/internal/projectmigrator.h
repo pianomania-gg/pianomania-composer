@@ -43,7 +43,6 @@ public:
 
 private:
 
-    muse::Ret askAboutMigration(MigrationOptions& out, const QString& appVersion, MigrationType migrationType);
 
     muse::Ret migrateProject(engraving::EngravingProjectPtr project, const MigrationOptions& opt);
 

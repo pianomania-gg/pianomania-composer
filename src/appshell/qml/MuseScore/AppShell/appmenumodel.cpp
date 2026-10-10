@@ -218,13 +218,7 @@ MenuItem* AppMenuModel::makeFileMenu()
         makeSeparator(),
         makeMenuItem("file-save"),
         makeMenuItem("file-save-as"),
-#ifndef PIANOMANIA_COMPOSER_PRODUCTION
-        makeMenuItem("file-save-to-cloud"),
-#endif
         makeMenu(TranslatableString("appshell/menu/file", "Save o&ther"), makeSaveOtherSubItems()),
-#ifndef PIANOMANIA_COMPOSER_PRODUCTION
-        makeMenu(TranslatableString("appshell/menu/file", "Pu&blish online"), makePublishOnlineSubItems()),
-#endif
         makeSeparator(),
         makeMenuItem("file-import-pdf"),
         makeMenuItem("file-import-audio-to-score"),

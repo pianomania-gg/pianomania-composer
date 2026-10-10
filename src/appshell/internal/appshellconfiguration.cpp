@@ -37,7 +37,6 @@ using namespace mu::notation;
 
 static const std::string module_name("appshell");
 
-static const Settings::Key HAS_COMPLETED_FIRST_LAUNCH_SETUP(module_name, "application/hasCompletedFirstLaunchSetup");
 
 static const Settings::Key WELCOME_DIALOG_SHOW_ON_STARTUP_KEY(module_name, "application/welcomeDialogShowOnStartup");
 static const Settings::Key WELCOME_DIALOG_LAST_SHOWN_VERSION_KEY(module_name, "application/welcomeDialogLastShownVersion");
@@ -70,7 +69,6 @@ static const std::string SESSION_RESOURCE_NAME("SESSION");
 
 void AppShellConfiguration::init()
 {
-    settings()->setDefaultValue(HAS_COMPLETED_FIRST_LAUNCH_SETUP, Val(false));
 
     settings()->setDefaultValue(WELCOME_DIALOG_SHOW_ON_STARTUP_KEY, Val(true));
     settings()->valueChanged(WELCOME_DIALOG_SHOW_ON_STARTUP_KEY).onReceive(this, [this](const Val&) {
@@ -92,19 +90,7 @@ void AppShellConfiguration::init()
     fileSystem()->makePath(sessionDataPath());
 }
 
-bool AppShellConfiguration::hasCompletedFirstLaunchSetup() const
-{
-#ifdef Q_OS_WASM
-    return true;
-#else
-    return settings()->value(HAS_COMPLETED_FIRST_LAUNCH_SETUP).toBool();
-#endif
-}
 
-void AppShellConfiguration::setHasCompletedFirstLaunchSetup(bool has)
-{
-    settings()->setSharedValue(HAS_COMPLETED_FIRST_LAUNCH_SETUP, Val(has));
-}
 
 bool AppShellConfiguration::welcomeDialogShowOnStartup() const
 {

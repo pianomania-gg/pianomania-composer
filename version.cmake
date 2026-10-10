@@ -36,8 +36,6 @@ endif()
 set(MUSE_APP_NAME_HUMAN_READABLE "Pianomania Composer")
 if(PIANOMANIA_COMPOSER_PROFILE STREQUAL "development")
     string(APPEND MUSE_APP_NAME_HUMAN_READABLE " Dev")
-elseif(PIANOMANIA_COMPOSER_PROFILE STREQUAL "internal")
-    string(APPEND MUSE_APP_NAME_HUMAN_READABLE " Internal")
 endif()
 set(MUSE_APP_NAME_MACHINE_READABLE "MuseScoreStudio")
 

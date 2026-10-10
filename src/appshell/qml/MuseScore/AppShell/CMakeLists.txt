@@ -32,10 +32,6 @@ qt_add_qml_module(appshell_qml
         composeraccountmodel.h
         DevTools/Settings/settingslistmodel.cpp
         DevTools/Settings/settingslistmodel.h
-        FirstLaunchSetup/firstlaunchsetupmodel.cpp
-        FirstLaunchSetup/firstlaunchsetupmodel.h
-        FirstLaunchSetup/themespagemodel.cpp
-        FirstLaunchSetup/themespagemodel.h
         maintoolbarmodel.cpp
         maintoolbarmodel.h
         mainwindowtitleprovider.cpp
@@ -64,9 +60,6 @@ qt_add_qml_module(appshell_qml
         DevTools/KeyNav/KeyNavSubSection.qml
         DevTools/MPE/ArticulationsProfileEditorView.qml
         DevTools/Settings/SettingsPage.qml
-        FirstLaunchSetup/FirstLaunchSetupDialog.qml
-        FirstLaunchSetup/Page.qml
-        FirstLaunchSetup/ThemesPage.qml
         HomePage/HomeMenu.qml
         HomePage/HomePage.qml
         HomePage/PluginsPage.qml
@@ -150,6 +143,5 @@ qt_add_resources(appshell_qml appshell_qml_resources
 # Necessary for the auto-generated sources
 target_include_directories(appshell_qml PRIVATE
     DevTools/Settings
-    FirstLaunchSetup
     PublishPage
 )

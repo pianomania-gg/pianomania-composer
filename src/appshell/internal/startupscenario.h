@@ -49,9 +49,6 @@ class StartupScenario : public IStartupScenario, public muse::Contextable, publi
     muse::ContextInject<ISessionsManager> sessionsManager = { this };
     muse::ContextInject<project::IProjectAutoSaver> projectAutoSaver = { this };
     muse::ContextInject<muse::audioplugins::IRegisterAudioPluginsScenario> registerAudioPluginsScenario = { this };
-    muse::ContextInject<muse::update::IAppUpdateScenario> appUpdateScenario = { this };
-    muse::ContextInject<mu::musesounds::IMuseSoundsCheckUpdateScenario> museSoundsUpdateScenario = { this };
-    muse::ContextInject<musesounds::IMuseSamplerCheckUpdateScenario> museSamplerCheckForUpdateScenario = { this };
 
 public:
     StartupScenario(const muse::modularity::ContextPtr& iocCtx)
@@ -76,7 +73,6 @@ private:
     void onStartupPageOpened(StartupModeType modeType);
 
     void showStartupDialogsIfNeed(StartupModeType modeType);
-    void checkAndShowMuseSamplerUpdateIfNeed();
     bool shouldShowWelcomeDialog(StartupModeType modeType) const;
 
     void openScore(const project::ProjectFile& file);
@@ -87,6 +83,5 @@ private:
     std::string m_startupTypeStr;
     project::ProjectFile m_startupScoreFile;
     bool m_startupCompleted = false;
-    size_t m_activeUpdateCheckCount = 0;
 };
 }
